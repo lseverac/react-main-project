@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
+
 import Person from './Person/Person';
 
 class App extends Component {
@@ -55,7 +56,8 @@ class App extends Component {
 
     render() {
         const buttonStyle = {
-            backgroundColor : 'white',
+            backgroundColor : 'green',
+            color : 'white',
             font : 'inherit',
             border : '1px solid blue',
             padding : '8px',
@@ -64,6 +66,8 @@ class App extends Component {
 
         let persons = null;
         if (this.state.showPersons) {
+            buttonStyle.backgroundColor = 'red';
+
             persons = (
                     <div>
                         {this.state.persons.map((person, idx) => {
@@ -78,10 +82,18 @@ class App extends Component {
             );
         }
 
+        const paragraphClasses = [];
+        if (this.state.persons.length <= 2) {
+            paragraphClasses.push('red');
+        }
+        if (this.state.persons.length <= 1) {
+            paragraphClasses.push('bold')
+        }
+
         return (
                 <div className="App">
                     <h1>Hello World</h1>
-                    <p>This is really working</p>
+                    <p className={paragraphClasses.join(' ')}>This is really working</p>
                     <button style={buttonStyle}
                             onClick={this.togglePersonHandler}>Toggle
                     </button>
